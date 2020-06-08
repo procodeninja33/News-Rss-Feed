@@ -1,0 +1,40 @@
+<ngx-spinner type="ball-fussion" size="medium"></ngx-spinner>
+
+<br><br>
+<div class="container">
+  <div class="jumbotron">
+    <form [formGroup]="searchForm">
+      <div class="form-group">
+        <label>Rss feed link</label>
+        <input type="email" class="form-control" formControlName="rss_feed" placeholder="https://news.abplive.com/home/feed">
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="getRssFeed()">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div style="margin:5%">
+  <div class="row">
+    <div class="col-5 border fix_height overflow-auto">
+      <h2><u>JSON Data</u></h2>
+      <pre>{{RssData | json }}</pre>
+    </div>
+    <div class="col-7 border fix_height overflow-auto">
+      <h2><u>View</u></h2>
+      <ul>
+        <li *ngFor="let item of newsItems">
+
+          <h3> {{item.title}} </h3>
+          <p class="text-muted">Date {{item.pubDate}}</p>
+
+          <img *ngIf="item.dispalyImage"
+            [src]="item.image || 'https://iitpkd.ac.in/sites/default/files/default_images/default-news-image_0.png'"
+            onError="this.src='https://iitpkd.ac.in/sites/default/files/default_images/default-news-image_0.png';">
+
+          <div [innerHTML]="item.description"> </div>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
